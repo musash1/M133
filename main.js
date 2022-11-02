@@ -9,6 +9,7 @@ let todos = [
 function updateToDoListOnScreen() {
   const todoListElement = document.getElementById("todolist");
   const todoListInput = document.getElementById("neuesToDo");
+  const loeschenButton = document.getElementsByClassName("loeschen");
 
   // Liste leeren
   todoListElement.innerHTML = "";
@@ -47,4 +48,10 @@ document.getElementById("aufraeumen").addEventListener("click", () => {
   }
   todos = newTodos;
   updateToDoListOnScreen();
+});
+
+const list = document.querySelector("todolist");
+// Add a click event listener to the list and its children
+list.addEventListener("click", (event) => {
+  console.log(event.target.type);
 });
