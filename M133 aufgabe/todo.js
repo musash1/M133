@@ -1,8 +1,9 @@
-export class ToDo {
+export class ToDo extends EventTarget {
   #titel = "";
   #erledigt = "";
 
   constructor(titel, erledigt) {
+    super();
     this.#titel = titel;
     this.#erledigt = erledigt;
   }
@@ -37,6 +38,9 @@ export class ToDo {
     divElement.appendChild(buttonElement);
 
     checkboxElement.setAttribute("type", "checkbox");
+    checkboxElement.addEventListener("change", () => {
+      this.dispatchEvent(new Event("erledigt"));
+    });
 
     buttonElement.className = "loeschen";
 
@@ -47,6 +51,10 @@ export class ToDo {
       checkboxElement.setAttribute("checked", "checked");
       divElement.className = "erledigt";
     }
+
+    buttonElement.addEventListener("click", () => {
+      this.dispatchEvent(new Event("loeschen"));
+    });
 
     return listElement;
   }
